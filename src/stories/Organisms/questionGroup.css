@@ -1,0 +1,14 @@
+.builder-question-group {
+  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.question-group-title {
+  font-size: 18px;
+}
+
+.builder-question-group .group-row {
+  margin: 15px;
+}

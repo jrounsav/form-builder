@@ -1,0 +1,14 @@
+.builder-page {
+  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.page-title {
+  font-size: 20px;
+}
+
+.builder-page .page-row {
+  margin: 15px;
+}

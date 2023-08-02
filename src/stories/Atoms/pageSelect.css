@@ -1,0 +1,9 @@
+.page-select {
+  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+}
+
+.page-select-option {
+  padding: 5px;
+  cursor: pointer;
+}

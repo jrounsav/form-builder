@@ -1,0 +1,16 @@
+.builder-question {
+  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 5px;
+}
+
+.gradient-div {
+  width: 300px;
+  height: 150px;
+  margin: 20px;
+  border-radius: 8px;
+
+  /* Create a gradient background */
+  background: linear-gradient(to right, rgba(255, 0, 0, 1), rgba(255, 0, 0, 0));
+
+  /* Add additional styles if needed */
+}

@@ -1,0 +1,10 @@
+.builder-answer {
+  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.builder-answer input {
+  margin-right: 10px;
+}

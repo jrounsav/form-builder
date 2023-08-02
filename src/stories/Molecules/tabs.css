@@ -1,0 +1,9 @@
+.builder-tabs {
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  gap: 10px;
+  gap: 10px 20px; /* row-gap column gap */
+  row-gap: 10px;
+  column-gap: 20px;
+}
