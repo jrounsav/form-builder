@@ -1,0 +1,12 @@
+.builder-preview-modal {
+  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 10px;
+}
+
+.preview-modal-form-title {
+  font-size: larger;
+  font-weight: bold;
+}

@@ -1,8 +1,10 @@
 import { ChangeEvent, useState } from "react"
 
 import "./question.css"
-import { QuestionType, Question as QuestionTS } from "../../types"
-import { Answer } from "../Atoms/Answer"
+import { QuestionType, Question as QuestionTS, EntityType } from "../../types"
+import { Answer } from "./Answer"
+import { RemoveButton } from "../Atoms/RemoveButton"
+import { AddButton } from "./AddButton"
 
 interface QuestionProps {
   question: QuestionTS
@@ -12,7 +14,7 @@ interface QuestionProps {
 export const Question = ({ question, onChange }: QuestionProps) => {
   const [selected, setSelected] = useState<number[]>([])
   const [userText, setUserText] = useState<string>("")
-  console.log(question)
+
   const { id, text, questionType, children = [] } = question
 
   const isMulti = questionType === QuestionType.Multi
@@ -37,25 +39,24 @@ export const Question = ({ question, onChange }: QuestionProps) => {
     setUserText(event.target.value)
   }
 
-  const handleKeyDown = (event: any) => {
-    if (event.keyCode === 13 && !event.shiftKey) {
-      event.preventDefault()
-      setUserText((prevText) => prevText + "\n")
-    }
-  }
-
   return (
     <div className="builder-question">
-      <div className="builder-question-text">{text}</div>
+      <div className="edit-row">
+        <div className="builder-question-text">{text}</div>
+        <RemoveButton target={question} />
+      </div>
       {isMulti || isRadio
         ? children.map((answer, index) => (
-            <Answer
-              checked={selected.includes(index)}
-              key={`${id}-${index}`}
-              text={answer.text}
-              questionType={questionType}
-              onChange={() => handleSelected(index)}
-            />
+            <div className="question-answer-row">
+              <Answer
+                answer={answer}
+                checked={selected.includes(index)}
+                key={`${id}-${index}`}
+                text={answer.text}
+                questionType={questionType}
+                onChange={() => handleSelected(index)}
+              />
+            </div>
           ))
         : null}
       {isTextInput ? (
@@ -63,9 +64,11 @@ export const Question = ({ question, onChange }: QuestionProps) => {
           questionType={questionType}
           text={userText}
           onChange={handleTextUpdate}
-          onKeyDown={handleKeyDown}
         />
       ) : null}
+      <div className="edit-footer">
+        <AddButton parentId={question.id} type={EntityType.Answer} />
+      </div>
     </div>
   )
 }

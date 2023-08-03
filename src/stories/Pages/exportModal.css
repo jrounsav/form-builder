@@ -1,0 +1,21 @@
+.builder-export-modal {
+  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  padding: 10px;
+  gap: 10px;
+}
+
+.export-modal-form-title {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.export-modal-config-output {
+  width: 100%;
+}
+
+.export-modal-config-output textarea {
+  width: 100%;
+}

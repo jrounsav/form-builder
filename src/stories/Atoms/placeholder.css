@@ -1,0 +1,7 @@
+.placeholder-container {
+  background: #d1ebff;
+}
+
+.rotate-left {
+  transform: rotate(180deg);
+}

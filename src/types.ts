@@ -1,15 +1,20 @@
 export enum EntityType {
-  Form,
-  Page,
-  Group,
-  Question,
-  Answer,
+  Form = "form",
+  Page = "page",
+  Group = "group",
+  Question = "question",
+  Answer = "answer",
 }
 
 export enum QuestionType {
-  Multi,
-  Single,
-  Text,
+  Multi = "multi",
+  Single = "single",
+  Text = "text",
+}
+
+export enum ExportType {
+  Builder = "formbuilder",
+  JSONForms = "jsonforms",
 }
 
 export interface FormEntity {
@@ -46,4 +51,10 @@ export interface Answer extends FormEntity {
   text: string
   maxLength?: number
   entityType: EntityType.Answer
+}
+
+export interface FormExport {
+  config: string
+  title: string
+  type: ExportType
 }

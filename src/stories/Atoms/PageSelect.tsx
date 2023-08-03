@@ -28,17 +28,25 @@ export const PageSelect = ({
         const distance = Math.abs(target - number)
         const isStart = number === 1
         const isEnd = number === numbersArray.length
+        const key = `page-select-${number}`
 
         if (distance > 6 && !isEnd && !isStart) return null
 
         if (distance > 3 && !isEnd && !isStart) {
-          return <span className="page-select-option">.</span>
+          return (
+            <span key={key} className="page-select-option">
+              .
+            </span>
+          )
         }
 
         return (
           <span
+            key={key}
             onClick={() => handleSelect(number)}
-            className="page-select-option"
+            className={`page-select-option ${
+              target + 1 === number && "current-selection"
+            }`}
           >
             {number}
           </span>

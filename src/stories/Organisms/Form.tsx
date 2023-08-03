@@ -1,41 +1,32 @@
 import { useState } from "react"
 
 import "./form.css"
-import { Form as FormTS } from "../../types"
+import { EntityType, Form as FormTS } from "../../types"
 import { Page } from "./Page"
 import { PageSelect } from "../Atoms/PageSelect"
+import { RemoveButton } from "../Atoms/RemoveButton"
+import useController from "../../hooks/useController"
+import { AddButton } from "../Molecules/AddButton"
+import { Button } from "../Atoms/Button"
 
 interface FormProps {
   form: FormTS
 }
 
 export const Form = ({ form }: FormProps) => {
-  const [activePage, setActivePage] = useState(0)
+  const { activePage, prevPage, nextPage, selectPage } = useController()
 
   const title = form?.title
   const children = form?.children || []
   const page = children?.[activePage]
-  const isSelectorVisible = children.length
-
-  const handleBack = () => {
-    if (activePage > 0) {
-      setActivePage((curr) => curr - 1)
-    }
-  }
-
-  const handleForward = () => {
-    if (activePage < children.length - 1) {
-      setActivePage((curr) => curr + 1)
-    }
-  }
-
-  const handleSelect = (target: number) => {
-    setActivePage(target - 1)
-  }
-
+  const isSelectorVisible = !!children.length
+  console.log(page)
   return (
     <div className="builder-form">
-      {title && <div className="form-title">{title}</div>}
+      <div className="edit-row">
+        {title && <div className="form-title">{title}</div>}
+        <RemoveButton target={form} />
+      </div>
       <div className="form-container">
         {page && (
           <div className="form-page-container">
@@ -45,11 +36,15 @@ export const Form = ({ form }: FormProps) => {
         {isSelectorVisible && (
           <PageSelect
             count={children.length}
-            handleBack={handleBack}
-            handleForward={handleForward}
-            handleSelect={handleSelect}
+            target={activePage}
+            handleBack={prevPage}
+            handleForward={nextPage}
+            handleSelect={selectPage}
           />
         )}
+        <div className="edit-footer">
+          <AddButton parentId={form.id} type={EntityType.Page} />
+        </div>
       </div>
     </div>
   )

@@ -1,55 +1,81 @@
-import logo from "./logo.svg"
-import { Counter } from "./features/counter/Counter"
 import "./App.css"
+import { Dashboard } from "./stories/Pages/Dashboard"
+import { useAppDispatch, useAppSelector } from "./app/hooks"
+import {
+  addForm,
+  nextForm,
+  prevForm,
+  selectActiveFormIndex,
+  selectForms,
+  addEntity,
+  removeEntity,
+  nextPage,
+  prevPage,
+  selectPage,
+  selectActivePageIndex,
+} from "./features/form/formSlice"
+import { ControllerContext } from "./ControllerContext"
+import { EntityType } from "./types"
 
 function App() {
+  const dispatch = useAppDispatch()
+  const forms = useAppSelector(selectForms)
+  const activeFormIndex = useAppSelector(selectActiveFormIndex)
+  const activePageIndex = useAppSelector(selectActivePageIndex)
+
+  const handleLastForm = () => {
+    dispatch(prevForm())
+  }
+
+  const handleNextForm = () => {
+    dispatch(nextForm())
+  }
+
+  const handlePrevPage = () => {
+    dispatch(prevPage())
+  }
+
+  const handleNextPage = () => {
+    dispatch(nextPage())
+  }
+
+  const handleSelectPage = (ind: number) => {
+    dispatch(selectPage(ind))
+  }
+
+  const handleAddForm = () => {
+    dispatch(addForm())
+  }
+
+  const handleAddEntity = (parentId: string, entityType: EntityType) => {
+    dispatch(addEntity({ parentId, entityType }))
+  }
+
+  const handleRemoveEntity = (id: string) => {
+    dispatch(removeEntity(id))
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+      <ControllerContext.Provider
+        value={{
+          isEditMode: true,
+          activePage: activePageIndex,
+          addEntity: handleAddEntity,
+          removeEntity: handleRemoveEntity,
+          nextPage: handleNextPage,
+          prevPage: handlePrevPage,
+          selectPage: handleSelectPage,
+        }}
+      >
+        <Dashboard
+          forms={forms}
+          activeFormIndex={activeFormIndex}
+          lastForm={handleLastForm}
+          nextForm={handleNextForm}
+          addForm={handleAddForm}
+        />
+      </ControllerContext.Provider>
     </div>
   )
 }

@@ -1,6 +1,8 @@
 import "./questionGroup.css"
-import { Group } from "../../types"
+import { EntityType, Group } from "../../types"
 import { Question } from "../Molecules/Question"
+import { RemoveButton } from "../Atoms/RemoveButton"
+import { AddButton } from "../Molecules/AddButton"
 
 interface QuestionGroupProps {
   questionGroup: Group
@@ -17,12 +19,18 @@ export const QuestionGroup = ({ questionGroup }: QuestionGroupProps) => {
 
   return (
     <div className="builder-question-group">
-      {title && <div className="question-group-title">{title}</div>}
+      <div className="edit-row">
+        {title && <div className="question-group-title">{title}</div>}
+        <RemoveButton target={questionGroup} />
+      </div>
       {children.map((question) => (
-        <div className="group-row">
+        <div key={question.id} className="group-row">
           <Question question={question} onChange={onChange} />
         </div>
       ))}
+      <div className="edit-footer">
+        <AddButton parentId={questionGroup.id} type={EntityType.Question} />
+      </div>
     </div>
   )
 }

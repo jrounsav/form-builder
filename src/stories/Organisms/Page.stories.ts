@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 
 import { Page } from "./Page"
-import { page1 } from "../example_data/base_config"
+import { page1 } from "../../example_data/base_config"
 
 const meta = {
   title: "Organisms/Page",

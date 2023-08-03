@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 
 import { Question } from "./Question"
 import { EntityType, QuestionType } from "../../types"
-import { answer1, answer2, answer3 } from "../example_data/base_config"
+import { answer1, answer2, answer3 } from "../../example_data/base_config"
 
 const meta = {
   title: "Molecules/Question",

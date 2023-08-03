@@ -1,6 +1,8 @@
 import "./page.css"
-import { Page as PageTS } from "../../types"
+import { EntityType, Page as PageTS } from "../../types"
 import { QuestionGroup } from "./QuestionGroup"
+import { RemoveButton } from "../Atoms/RemoveButton"
+import { AddButton } from "../Molecules/AddButton"
 
 interface PageProps {
   page: PageTS
@@ -12,12 +14,18 @@ export const Page = ({ page }: PageProps) => {
 
   return (
     <div className="builder-page">
-      {title && <div className="page-title">{title}</div>}
+      <div className="edit-row">
+        {title && <div className="page-title">{title}</div>}
+        <RemoveButton target={page} />
+      </div>
       {children.map((group) => (
-        <div className="page-row">
+        <div key={group.id} className="page-row">
           <QuestionGroup questionGroup={group} />
         </div>
       ))}
+      <div className="edit-footer">
+        <AddButton parentId={page.id} type={EntityType.Group} />
+      </div>
     </div>
   )
 }

@@ -1,39 +1,29 @@
-.App {
-  text-align: center;
+body,
+html {
+  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
-  }
-}
-
-.App-header {
-  min-height: 100vh;
+#root {
   display: flex;
-  flex-direction: column;
+  height: inherit;
+}
+
+.App {
+  display: flex;
+  flex: 1;
+}
+
+.edit-row {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+}
+
+.edit-footer {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-}
-
-.App-link {
-  color: rgb(112, 76, 182);
-}
-
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
 }
