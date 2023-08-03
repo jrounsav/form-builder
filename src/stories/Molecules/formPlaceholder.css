@@ -2,7 +2,6 @@
   font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
   border: 0;
-  /* border-radius: 3em; */
   cursor: pointer;
   display: inline-block;
   position: relative;
@@ -10,10 +9,11 @@
 
 .form-placeholder-text {
   position: absolute;
-  top: 50%; /* Move the child 50% from the top of the parent */
-  left: 30%; /* Move the child 50% from the left of the parent */
+  top: 50%;
+  left: 30%;
   transform: translate(-30%, -50%) scaleY(2);
   font-size: 30px;
   font-weight: 100;
   color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
 }

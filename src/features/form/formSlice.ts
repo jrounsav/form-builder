@@ -6,6 +6,7 @@ import {
   FormEntity,
   Form as FormTS,
   Question,
+  QuestionType,
 } from "../../types"
 import { form1, form2 } from "../../example_data/base_config"
 import { makeFormId, insertFormEntity, removeFormEntity } from "../../utils"
@@ -99,6 +100,7 @@ export const formSlice = createSlice({
             id,
             text: `${entityType} ${id}`,
             children: [],
+            questionType: QuestionType.Multi,
             entityType,
           } as Answer | Question
           break
