@@ -25,14 +25,14 @@ export const PageSelect = ({
         &lt;
       </span>
       {numbersArray.map((number) => {
-        const distance = Math.abs(target - number)
+        const distance = Math.abs(target + 1 - number)
         const isStart = number === 1
         const isEnd = number === numbersArray.length
         const key = `page-select-${number}`
 
-        if (distance > 6 && !isEnd && !isStart) return null
+        if (distance > 4 && !isEnd && !isStart) return null
 
-        if (distance > 3 && !isEnd && !isStart) {
+        if (distance > 2 && !isEnd && !isStart) {
           return (
             <span key={key} className="page-select-option">
               .
