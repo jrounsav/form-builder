@@ -3,6 +3,7 @@ import { Dropdown } from "../Atoms/Dropdown"
 import { Adapter, ExportType, Form as FormTS, FormExport } from "../../types"
 import { Form } from "../Organisms/Form"
 import { ControllerContext } from "../../ControllerContext"
+import { JSONFormsPreview } from "./JSONFormsPreview"
 
 interface ExportModalProps {
   formExport: FormExport
@@ -31,6 +32,12 @@ export const PreviewModal = ({
           </ControllerContext.Provider>
         )
       case ExportType.JSONForms:
+        const config = JSON.parse(formExport.config)
+        return (
+          <div>
+            <JSONFormsPreview {...config} />
+          </div>
+        )
       default:
         return null
     }
@@ -38,7 +45,7 @@ export const PreviewModal = ({
 
   return (
     <div className="builder-preview-modal">
-      <div>Form Preview </div>
+      <div>Form Preview: {formExport.title} </div>
       <div>
         Adapter Type: <Dropdown options={adapters} onSelect={onSelectAdapter} />
       </div>

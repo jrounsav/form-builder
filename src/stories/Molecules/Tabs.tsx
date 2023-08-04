@@ -14,11 +14,14 @@ export const Tabs = ({
   importForm,
   exportForm,
   previewForm,
-  ...props
 }: ButtonProps) => {
   return (
     <div className="builder-tabs">
-      <Button label="Add form" selected={true} onClick={addForm} />
+      <Button
+        label="Add form"
+        selected={true}
+        onClick={() => (addForm ? addForm() : null)}
+      />
       <Button label="Import" onClick={importForm} />
       <Button label="Export" onClick={exportForm} />
       <Button label="Preview" onClick={previewForm} />

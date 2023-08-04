@@ -14,11 +14,6 @@
   width: 100%;
 }
 
-.import-modal-config-input textarea,
-input {
-  flex: 1;
-}
-
 .import-modal-config-input input {
   width: 90%;
 }

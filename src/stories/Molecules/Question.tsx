@@ -72,9 +72,11 @@ export const Question = ({ question, onChange }: QuestionProps) => {
           onChange={handleTextUpdate}
         />
       ) : null}
-      <div className="edit-footer">
-        <AddButton parentId={question.id} type={EntityType.Answer} />
-      </div>
+      {!isTextInput && (
+        <div className="edit-footer">
+          <AddButton parentId={question.id} type={EntityType.Answer} />
+        </div>
+      )}
     </div>
   )
 }

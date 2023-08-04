@@ -10,7 +10,6 @@ html {
 }
 
 .App {
-  display: flex;
   flex: 1;
 }
 
