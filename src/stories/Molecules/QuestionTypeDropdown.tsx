@@ -18,8 +18,8 @@ export const QuestionTypeDropdown = ({
     { name: "Text input", id: QuestionType.Text },
   ]
 
-  const handleSelect = (val: QuestionType) => {
-    updateQuestionType(question.id, val)
+  const handleSelect = (val: string) => {
+    updateQuestionType(question.id, val as QuestionType)
   }
 
   if (!isEditMode) {
@@ -32,7 +32,7 @@ export const QuestionTypeDropdown = ({
       <Dropdown
         options={options}
         onSelect={handleSelect}
-        startingId={question.questionType}
+        selectedId={question.questionType}
       />
     </div>
   )

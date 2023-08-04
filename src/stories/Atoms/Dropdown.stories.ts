@@ -26,7 +26,7 @@ export const WithStartingOption: Story = {
   args: {
     fillerText: "Select something please",
     options: [{ name: "Human Readable name", id: "idToMatch" }],
-    startingId: "idToMatch",
+    selectedId: "idToMatch",
     onSelect: console.log,
   },
 }

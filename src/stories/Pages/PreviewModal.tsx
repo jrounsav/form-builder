@@ -1,37 +1,48 @@
 import "./previewModal.css"
 import { Dropdown } from "../Atoms/Dropdown"
-import { Form as FormTS } from "../../types"
+import { Adapter, ExportType, Form as FormTS, FormExport } from "../../types"
 import { Form } from "../Organisms/Form"
 import { ControllerContext } from "../../ControllerContext"
-import { AdapterInfo } from "../../app/adapters"
 
 interface ExportModalProps {
-  form: FormTS
-  adapters: AdapterInfo[]
+  formExport: FormExport
+  adapters: Adapter[]
   onSelectAdapter: (type: string) => void
 }
 
 export const PreviewModal = ({
-  form,
+  formExport,
   adapters = [],
   onSelectAdapter,
 }: ExportModalProps) => {
+  const renderForm = () => {
+    switch (formExport?.type) {
+      case ExportType.Builder:
+        const form = JSON.parse(formExport.config) as FormTS
+        return (
+          <ControllerContext.Provider
+            // @ts-ignore
+            value={{
+              isPreview: true,
+              previewForm: form,
+            }}
+          >
+            <Form form={form} />
+          </ControllerContext.Provider>
+        )
+      case ExportType.JSONForms:
+      default:
+        return null
+    }
+  }
+
   return (
-    <ControllerContext.Provider
-      value={{
-        isPreview: true,
-        // @ts-ignore
-        previewForm: form,
-      }}
-    >
-      <div className="builder-preview-modal">
-        <div>Form Preview </div>
-        <div>
-          Adapter Type:{" "}
-          <Dropdown options={adapters} onSelect={onSelectAdapter} />
-        </div>
-        <Form form={form} />
+    <div className="builder-preview-modal">
+      <div>Form Preview </div>
+      <div>
+        Adapter Type: <Dropdown options={adapters} onSelect={onSelectAdapter} />
       </div>
-    </ControllerContext.Provider>
+      {renderForm()}
+    </div>
   )
 }

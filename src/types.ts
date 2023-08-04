@@ -58,3 +58,11 @@ export interface FormExport {
   title: string
   type: ExportType
 }
+
+export type AdapterFunction = (form: Form) => FormExport
+
+export interface Adapter {
+  name: string
+  id: ExportType
+  func: AdapterFunction
+}

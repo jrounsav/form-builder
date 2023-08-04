@@ -24,7 +24,9 @@ import { ExportModal } from "./stories/Pages/ExportModal"
 import { ImportModal } from "./stories/Pages/ImportModal"
 import { PreviewModal } from "./stories/Pages/PreviewModal"
 import { form1 } from "./example_data/base_config"
-import { adapters, generateBuilderConfig } from "./app/adapters"
+import { adapters, formToExportConfig } from "./app/adapters"
+import { ExportModalContainer } from "./components/ExportModalContainer"
+import { PreviewModalContainer } from "./components/PreviewModalContainer"
 
 enum ModalType {
   Import = "import",
@@ -39,6 +41,8 @@ function App() {
   const activePageIndex = useAppSelector(selectActivePageIndex)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modal, setModal] = useState<ModalType | null>(null)
+
+  const form = forms[activeFormIndex]
 
   const handleLastForm = () => {
     dispatch(prevForm())
@@ -105,23 +109,10 @@ function App() {
       case ModalType.Import:
         return <ImportModal onImport={handleAddForm} />
       case ModalType.Export:
-        const config = generateBuilderConfig(forms[activeFormIndex])
-        return (
-          <ExportModal
-            formExport={config}
-            formTitle={config.title}
-            adapters={adapters}
-            onSelectAdapter={console.log}
-          />
-        )
+        return <ExportModalContainer form={form} />
+
       case ModalType.Preview:
-        return (
-          <PreviewModal
-            adapters={adapters}
-            form={forms[activeFormIndex]}
-            onSelectAdapter={console.log}
-          />
-        )
+        return <PreviewModalContainer form={form} />
       default:
         return null
     }
