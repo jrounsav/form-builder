@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { RootState, AppThunk } from "../../app/store"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { RootState } from "../../app/store"
 import {
   Answer,
   EntityType,
@@ -8,7 +8,6 @@ import {
   Question,
   QuestionType,
 } from "../../types"
-import { form1, form2 } from "../../example_data/base_config"
 import {
   makeFormId,
   insertFormEntity,

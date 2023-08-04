@@ -53,11 +53,10 @@ export const Question = ({ question, onChange }: QuestionProps) => {
       </div>
       {isMulti || isRadio
         ? children.map((answer, index) => (
-            <div className="question-answer-row">
+            <div key={`${id}-${index}`} className="question-answer-row">
               <Answer
                 answer={answer}
                 checked={selected.includes(index)}
-                key={`${id}-${index}`}
                 text={answer.text}
                 questionType={questionType}
                 onChange={() => handleSelected(index)}
