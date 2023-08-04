@@ -2,11 +2,8 @@ import "./previewModal.css"
 import { Dropdown } from "../Atoms/Dropdown"
 import { Form as FormTS } from "../../types"
 import { Form } from "../Organisms/Form"
-
-interface AdapterInfo {
-  name: string
-  id: string
-}
+import { ControllerContext } from "../../ControllerContext"
+import { AdapterInfo } from "../../app/adapters"
 
 interface ExportModalProps {
   form: FormTS
@@ -20,12 +17,21 @@ export const PreviewModal = ({
   onSelectAdapter,
 }: ExportModalProps) => {
   return (
-    <div className="builder-preview-modal">
-      <div>Form Preview </div>
-      <div>
-        Adapter Type: <Dropdown options={adapters} onSelect={onSelectAdapter} />
+    <ControllerContext.Provider
+      value={{
+        isPreview: true,
+        // @ts-ignore
+        previewForm: form,
+      }}
+    >
+      <div className="builder-preview-modal">
+        <div>Form Preview </div>
+        <div>
+          Adapter Type:{" "}
+          <Dropdown options={adapters} onSelect={onSelectAdapter} />
+        </div>
+        <Form form={form} />
       </div>
-      <Form form={form} />
-    </div>
+    </ControllerContext.Provider>
   )
 }

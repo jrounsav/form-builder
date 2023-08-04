@@ -14,6 +14,7 @@ import {
   removeFormEntityAndSetPage,
   updateFormEntity,
   updateQuestionType as updateQuestionTypeUtil,
+  updateAllChildIds,
 } from "../../utils"
 
 export interface FormState {
@@ -63,13 +64,19 @@ export const formSlice = createSlice({
     selectPage: (state, action: PayloadAction<number>) => {
       state.activePageIndex = action.payload - 1
     },
-    addForm: (state) => {
+    addForm: (state, action: PayloadAction<FormTS | undefined>) => {
       const id = makeFormId()
-      const form: FormTS = {
+      let form: FormTS = {
         id,
         title: "",
         children: [],
         entityType: EntityType.Form,
+      }
+
+      if (action?.payload) {
+        form = action.payload
+        form.id = id
+        form.children = updateAllChildIds(form.children || [])
       }
 
       state.forms = [...state.forms, form]

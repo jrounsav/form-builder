@@ -54,6 +54,17 @@ export function updateFormEntity(arr: any[], id: string, text: string) {
   return arr
 }
 
+export function updateAllChildIds(arr: any[]) {
+  for (const item of arr) {
+    const id = makeFormId()
+    item.id = id
+    if (Array.isArray(item.children)) {
+      item.children = updateAllChildIds(item.children)
+    }
+  }
+  return arr
+}
+
 export function updateQuestionType(
   arr: any[],
   id: string,

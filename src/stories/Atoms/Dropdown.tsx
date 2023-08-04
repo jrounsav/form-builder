@@ -3,7 +3,7 @@ import { QuestionType } from "../../types"
 
 interface DropdownOption {
   name: string
-  id: QuestionType
+  id: string | QuestionType
 }
 
 interface DropdownProps {
