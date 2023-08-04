@@ -5,6 +5,8 @@ import { QuestionType, Question as QuestionTS, EntityType } from "../../types"
 import { Answer } from "./Answer"
 import { RemoveButton } from "../Atoms/RemoveButton"
 import { AddButton } from "./AddButton"
+import { InlineEditableText } from "../Atoms/InlineEditableText"
+import { QuestionTypeDropdown } from "./QuestionTypeDropdown"
 
 interface QuestionProps {
   question: QuestionTS
@@ -42,8 +44,12 @@ export const Question = ({ question, onChange }: QuestionProps) => {
   return (
     <div className="builder-question">
       <div className="edit-row">
-        <div className="builder-question-text">{text}</div>
+        <span className="question-title-descriptor">Question:</span>
+        <InlineEditableText targetId={question.id} text={text} />
         <RemoveButton target={question} />
+      </div>
+      <div style={{ marginBottom: "5px", marginTop: "5px" }}>
+        <QuestionTypeDropdown question={question} />
       </div>
       {isMulti || isRadio
         ? children.map((answer, index) => (
@@ -61,6 +67,7 @@ export const Question = ({ question, onChange }: QuestionProps) => {
         : null}
       {isTextInput ? (
         <Answer
+          answer={children?.[0]}
           questionType={questionType}
           text={userText}
           onChange={handleTextUpdate}

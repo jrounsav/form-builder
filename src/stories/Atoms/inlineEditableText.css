@@ -1,0 +1,15 @@
+.inline-edit-text {
+  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.inline-edit-text input {
+  width: 100%;
+}
+
+.inline-editable-empty {
+  font-size: small;
+  color: rgb(135, 135, 135);
+}

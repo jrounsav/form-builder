@@ -6,6 +6,8 @@ const useController = () => {
     isEditMode,
     addEntity,
     removeEntity,
+    updateEntity,
+    updateQuestionType,
     nextPage,
     prevPage,
     selectPage,
@@ -17,9 +19,11 @@ const useController = () => {
     addEntity,
     isEditMode,
     removeEntity,
+    updateEntity,
     nextPage,
     prevPage,
     selectPage,
+    updateQuestionType,
   }
 }
 

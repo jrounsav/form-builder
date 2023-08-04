@@ -24,3 +24,10 @@
   flex-direction: column;
   align-items: center;
 }
+
+.form-title-descriptor {
+  margin-right: 5px;
+  font-weight: light;
+  font-size: small;
+  color: gray;
+}

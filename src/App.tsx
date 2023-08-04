@@ -13,9 +13,11 @@ import {
   prevPage,
   selectPage,
   selectActivePageIndex,
+  updateEntity,
+  updateQuestionType,
 } from "./features/form/formSlice"
 import { ControllerContext } from "./ControllerContext"
-import { EntityType } from "./types"
+import { EntityType, QuestionType } from "./types"
 
 function App() {
   const dispatch = useAppDispatch()
@@ -55,6 +57,14 @@ function App() {
     dispatch(removeEntity(id))
   }
 
+  const handleUpdateEntity = (id: string, text: string) => {
+    dispatch(updateEntity({ targetId: id, text }))
+  }
+
+  const handleUpdateQuestionType = (id: string, questionType: QuestionType) => {
+    dispatch(updateQuestionType({ targetId: id, questionType }))
+  }
+
   return (
     <div className="App">
       <ControllerContext.Provider
@@ -66,6 +76,8 @@ function App() {
           nextPage: handleNextPage,
           prevPage: handlePrevPage,
           selectPage: handleSelectPage,
+          updateEntity: handleUpdateEntity,
+          updateQuestionType: handleUpdateQuestionType,
         }}
       >
         <Dashboard

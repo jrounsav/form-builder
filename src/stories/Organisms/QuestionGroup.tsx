@@ -3,6 +3,7 @@ import { EntityType, Group } from "../../types"
 import { Question } from "../Molecules/Question"
 import { RemoveButton } from "../Atoms/RemoveButton"
 import { AddButton } from "../Molecules/AddButton"
+import { InlineEditableText } from "../Atoms/InlineEditableText"
 
 interface QuestionGroupProps {
   questionGroup: Group
@@ -20,7 +21,8 @@ export const QuestionGroup = ({ questionGroup }: QuestionGroupProps) => {
   return (
     <div className="builder-question-group">
       <div className="edit-row">
-        {title && <div className="question-group-title">{title}</div>}
+        <span className="group-title-descriptor">Group:</span>
+        <InlineEditableText targetId={questionGroup.id} text={title} />
         <RemoveButton target={questionGroup} />
       </div>
       {children.map((question) => (

@@ -1,5 +1,3 @@
-import { useState } from "react"
-
 import "./form.css"
 import { EntityType, Form as FormTS } from "../../types"
 import { Page } from "./Page"
@@ -7,7 +5,7 @@ import { PageSelect } from "../Atoms/PageSelect"
 import { RemoveButton } from "../Atoms/RemoveButton"
 import useController from "../../hooks/useController"
 import { AddButton } from "../Molecules/AddButton"
-import { Button } from "../Atoms/Button"
+import { InlineEditableText } from "../Atoms/InlineEditableText"
 
 interface FormProps {
   form: FormTS
@@ -20,11 +18,12 @@ export const Form = ({ form }: FormProps) => {
   const children = form?.children || []
   const page = children?.[activePage]
   const isSelectorVisible = !!children.length
-  console.log(page)
+
   return (
     <div className="builder-form">
       <div className="edit-row">
-        {title && <div className="form-title">{title}</div>}
+        <span className="form-title-descriptor">Form:</span>
+        <InlineEditableText targetId={form.id} text={title} />
         <RemoveButton target={form} />
       </div>
       <div className="form-container">

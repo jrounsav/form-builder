@@ -13,3 +13,10 @@
 .builder-page .page-row {
   margin: 15px;
 }
+
+.page-title-descriptor {
+  margin-right: 5px;
+  font-weight: light;
+  font-size: small;
+  color: gray;
+}

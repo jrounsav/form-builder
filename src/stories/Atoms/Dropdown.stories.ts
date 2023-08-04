@@ -21,3 +21,12 @@ export const Default: Story = {
     onSelect: console.log,
   },
 }
+
+export const WithStartingOption: Story = {
+  args: {
+    fillerText: "Select something please",
+    options: [{ name: "Human Readable name", id: "idToMatch" }],
+    startingId: "idToMatch",
+    onSelect: console.log,
+  },
+}

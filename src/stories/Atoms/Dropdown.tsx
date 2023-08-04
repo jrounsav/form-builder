@@ -1,21 +1,35 @@
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
+import { QuestionType } from "../../types"
 
 interface DropdownOption {
   name: string
-  id: string
+  id: QuestionType
 }
 
 interface DropdownProps {
   fillerText?: string
   options: DropdownOption[]
-  onSelect: (id: string) => void
+  startingId?: string
+  onSelect: (id: QuestionType) => void
 }
 
-export const Dropdown = ({ fillerText, options, onSelect }: DropdownProps) => {
+export const Dropdown = ({
+  fillerText,
+  options,
+  startingId,
+  onSelect,
+}: DropdownProps) => {
   const [selectedOption, setSelectedOption] = useState("")
 
+  useEffect(() => {
+    if (startingId) {
+      const option = options.find((opt) => opt.id === startingId)
+      option && setSelectedOption(option.id)
+    }
+  }, [])
+
   const handleOptionChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const selectedValue = event.target.value
+    const selectedValue = event.target.value as QuestionType
     setSelectedOption(selectedValue)
     onSelect(selectedValue)
   }

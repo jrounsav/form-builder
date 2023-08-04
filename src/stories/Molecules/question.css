@@ -5,6 +5,13 @@
   border-radius: 15px;
 }
 
+.question-title-descriptor {
+  margin-right: 5px;
+  font-weight: light;
+  font-size: small;
+  color: gray;
+}
+
 .question-answer-row {
   margin-top: 10px;
 }

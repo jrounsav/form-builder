@@ -9,16 +9,22 @@ import {
   QuestionType,
 } from "../../types"
 import { form1, form2 } from "../../example_data/base_config"
-import { makeFormId, insertFormEntity, removeFormEntity } from "../../utils"
+import {
+  makeFormId,
+  insertFormEntity,
+  removeFormEntityAndSetPage,
+  updateFormEntity,
+  updateQuestionType as updateQuestionTypeUtil,
+} from "../../utils"
 
-interface FormState {
+export interface FormState {
   forms: FormTS[]
   activeFormIndex: number
   activePageIndex: number
 }
 
 const initialState: FormState = {
-  forms: [form1, form2],
+  forms: [],
   activeFormIndex: 0,
   activePageIndex: 0,
 }
@@ -62,7 +68,7 @@ export const formSlice = createSlice({
       const id = makeFormId()
       const form: FormTS = {
         id,
-        title: `${EntityType.Form} ${id}`,
+        title: "",
         children: [],
         entityType: EntityType.Form,
       }
@@ -78,7 +84,7 @@ export const formSlice = createSlice({
       const id = makeFormId()
       let entity: FormEntity = {
         id,
-        title: `${entityType} ${id}`,
+        title: "",
         children: [],
         entityType,
       }
@@ -89,7 +95,7 @@ export const formSlice = createSlice({
         case EntityType.Group:
           entity = {
             id,
-            title: `${entityType} ${id}`,
+            title: "",
             children: [],
             entityType,
           }
@@ -98,7 +104,7 @@ export const formSlice = createSlice({
         case EntityType.Answer:
           entity = {
             id,
-            text: `${entityType} ${id}`,
+            text: "",
             children: [],
             questionType: QuestionType.Multi,
             entityType,
@@ -108,6 +114,7 @@ export const formSlice = createSlice({
 
       insertFormEntity(state.forms || [], parentId, entity)
     },
+    /** This is awfully convoluted */
     removeEntity: (state, action: PayloadAction<string>) => {
       const { forms, activeFormIndex } = state
       const targetForm = forms[activeFormIndex]
@@ -116,18 +123,14 @@ export const formSlice = createSlice({
 
       if (targetForm.id === id) {
         state.forms = state.forms.filter((form) => form.id !== id)
-        /** TODO - this sucks */
-        state.activeFormIndex = 0
-        state.activePageIndex = 0
+        activatePrevForm(state)
       } else {
-        /** TODO - this sucks too */
-        state.activePageIndex = 0
         state.forms = state.forms.map((form) => {
           if (form.id !== targetForm.id) {
             return form
           } else {
             const children = !!form.children
-              ? [...removeFormEntity(form.children, id)]
+              ? [...removeFormEntityAndSetPage(form.children, id, state)]
               : form.children
 
             return {
@@ -138,8 +141,30 @@ export const formSlice = createSlice({
         })
       }
     },
+    updateEntity: (
+      state,
+      action: PayloadAction<{ targetId: string; text: string }>,
+    ) => {
+      const { targetId, text } = action.payload
+      state.forms = updateFormEntity(state.forms, targetId, text)
+    },
+    updateQuestionType: (
+      state,
+      action: PayloadAction<{ targetId: string; questionType: QuestionType }>,
+    ) => {
+      const { targetId, questionType } = action.payload
+      state.forms = updateQuestionTypeUtil(state.forms, targetId, questionType)
+    },
   },
 })
+
+export const activatePrevForm = (state: FormState) => {
+  const index = state.activeFormIndex
+  if (index > 0) {
+    state.activeFormIndex -= 1
+  }
+  state.activePageIndex = 0
+}
 
 export const {
   addForm,
@@ -150,6 +175,8 @@ export const {
   nextPage,
   prevPage,
   selectPage,
+  updateEntity,
+  updateQuestionType,
 } = formSlice.actions
 
 export const selectForm = (state: RootState) => {
