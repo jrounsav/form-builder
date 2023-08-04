@@ -90,13 +90,21 @@ function App() {
   }
 
   const openExportModal = () => {
-    setModal(ModalType.Export)
-    setIsModalOpen(true)
+    if (form) {
+      setModal(ModalType.Export)
+      setIsModalOpen(true)
+    } else {
+      alert("Nothing to export")
+    }
   }
 
   const openPreviewModal = () => {
-    setModal(ModalType.Preview)
-    setIsModalOpen(true)
+    if (form) {
+      setModal(ModalType.Preview)
+      setIsModalOpen(true)
+    } else {
+      alert("Nothing to preview")
+    }
   }
 
   const closeModal = () => {
@@ -121,7 +129,7 @@ function App() {
   const modalContent = selectModal(modal)
 
   return (
-    <div className="App">
+    <div className="Approot">
       <ControllerContext.Provider
         value={{
           isPreview: false,

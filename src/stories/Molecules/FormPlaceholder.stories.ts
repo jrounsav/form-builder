@@ -27,6 +27,6 @@ export const Left: Story = {
 
 export const Hidden: Story = {
   args: {
-    isVisible: false,
+    isHidden: false,
   },
 }

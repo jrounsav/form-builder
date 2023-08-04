@@ -17,3 +17,7 @@
 .import-modal-config-input input {
   width: 90%;
 }
+
+.import-modal-config-input textarea {
+  flex: 1;
+}

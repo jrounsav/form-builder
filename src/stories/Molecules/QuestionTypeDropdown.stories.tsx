@@ -17,6 +17,7 @@ export default meta
 
 export const Default = () => {
   return (
+    // @ts-ignore
     <ControllerContext.Provider value={{ isEditMode: true }}>
       <QuestionTypeDropdown question={multiQuestion1} />
     </ControllerContext.Provider>
@@ -25,6 +26,7 @@ export const Default = () => {
 
 export const Radio = () => {
   return (
+    // @ts-ignore
     <ControllerContext.Provider value={{ isEditMode: true }}>
       <QuestionTypeDropdown question={radioQuestion1} />
     </ControllerContext.Provider>
@@ -33,6 +35,7 @@ export const Radio = () => {
 
 export const NoEdit = () => {
   return (
+    // @ts-ignore
     <ControllerContext.Provider value={{ isEditMode: false }}>
       <QuestionTypeDropdown question={radioQuestion1} />
     </ControllerContext.Provider>

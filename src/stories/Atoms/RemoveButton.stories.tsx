@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta } from "@storybook/react"
 
 import { RemoveButton } from "./RemoveButton"
 import { ControllerContext } from "../../ControllerContext"
@@ -17,6 +17,7 @@ export default meta
 
 export const EditMode = () => {
   return (
+    // @ts-ignore
     <ControllerContext.Provider value={{ isEditMode: true }}>
       <RemoveButton target={page1} />
     </ControllerContext.Provider>
@@ -25,6 +26,7 @@ export const EditMode = () => {
 
 export const NotEditMode = () => {
   return (
+    // @ts-ignore
     <ControllerContext.Provider value={{ isEditMode: false }}>
       <RemoveButton target={page1} />
     </ControllerContext.Provider>

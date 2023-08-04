@@ -17,6 +17,7 @@ export default meta
 
 export const EditMode = () => {
   return (
+    // @ts-ignore
     <ControllerContext.Provider value={{ isEditMode: true }}>
       <AddButton parentId="fake" type={EntityType.Form} />
     </ControllerContext.Provider>
@@ -25,6 +26,7 @@ export const EditMode = () => {
 
 export const NotEditMode = () => {
   return (
+    // @ts-ignore
     <ControllerContext.Provider value={{ isEditMode: false }}>
       <AddButton parentId="fake" type={EntityType.Form} />
     </ControllerContext.Provider>

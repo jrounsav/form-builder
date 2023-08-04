@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 
 import { ExportModal } from "./ExportModal"
 import { builderExport1 } from "../../example_data/base_config"
+import { adapters } from "../../app/adapters"
 
 const meta = {
   title: "Pages/ExportModal",
@@ -19,10 +20,8 @@ export const Default: Story = {
   args: {
     formTitle: builderExport1.title,
     formExport: builderExport1,
-    adapters: [
-      { name: "Form Builder", id: "builder" },
-      { name: "JSON Forms", id: "jsonforms" },
-    ],
+    adapters,
+    adapterId: adapters[0].id,
     onSelectAdapter: console.log,
   },
 }

@@ -6,7 +6,12 @@ import {
   Page,
   QuestionType,
 } from "../../types"
-import { Category, GroupLayout, JsonSchema } from "@jsonforms/core"
+import {
+  Category,
+  GroupLayout,
+  JsonSchema,
+  LabelElement,
+} from "@jsonforms/core"
 
 const type = ExportType.JSONForms
 const friendlyTypeName = "JSON Forms"
@@ -45,6 +50,13 @@ const _toConfig = (form: Form) => {
             group.children.forEach((question) => {
               switch (question.questionType) {
                 case QuestionType.Multi:
+                  if (question?.text) {
+                    const label: LabelElement = {
+                      type: "Label",
+                      text: question.text,
+                    }
+                    uigroup.elements.push(label)
+                  }
                   if (question.children.length) {
                     question.children.forEach((answer) => {
                       const schemactrl = {

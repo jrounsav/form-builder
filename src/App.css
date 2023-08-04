@@ -9,8 +9,9 @@ html {
   height: inherit;
 }
 
-.App {
+.Approot {
   flex: 1;
+  display: flex;
 }
 
 .edit-row {
